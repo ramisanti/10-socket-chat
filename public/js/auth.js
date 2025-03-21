@@ -26,7 +26,7 @@ miFormulario.addEventListener('submit', ev => {
         }
 
         localStorage.setItem('token', token);
-        //window.location = 'chat.html';
+        window.location = 'chat.html';
     })
     .catch( err => {
         console.log(err)
@@ -49,9 +49,9 @@ function onSignIn(googleUser) {
     .then( ({ token }) => {
         localStorage.setItem('token',token);
         //window.location = 'chat.html';
+        console.log(token);
     })
     .catch( console.log );
-    
 }
 
 function signOut() {
