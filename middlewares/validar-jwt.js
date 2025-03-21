@@ -16,7 +16,7 @@ const validarJWT = async( req = request, res = response, next ) => {
 
     try {
         
-        const { uid } = jwt.verify( token, process.env.SECRETORPRIVATEKEY );
+        const { uid } = jwt.verify( token, process.env.PRIVATEKEY );
 
         // leer el usuario que corresponde al uid
         const usuario = await Usuario.findById( uid );
@@ -47,8 +47,6 @@ const validarJWT = async( req = request, res = response, next ) => {
     }
 
 }
-
-
 
 
 module.exports = {

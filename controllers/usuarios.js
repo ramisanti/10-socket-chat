@@ -4,8 +4,6 @@ const bcryptjs = require('bcryptjs');
 
 const Usuario = require('../models/usuario');
 
-
-
 const usuariosGet = async(req = request, res = response) => {
 
     const { limite = 5, desde = 0 } = req.query;
@@ -26,8 +24,8 @@ const usuariosGet = async(req = request, res = response) => {
 
 const usuariosPost = async(req, res = response) => {
     
-    const { nombre, correo, password, rol } = req.body;
-    const usuario = new Usuario({ nombre, correo, password, rol });
+    const { nombre, email, password, rol } = req.body;
+    const usuario = new Usuario({ nombre, email, password, rol });
 
     // Encriptar la contraseña
     const salt = bcryptjs.genSaltSync();
@@ -44,7 +42,7 @@ const usuariosPost = async(req, res = response) => {
 const usuariosPut = async(req, res = response) => {
 
     const { id } = req.params;
-    const { _id, password, google, correo, ...resto } = req.body;
+    const { _id, password, google, email, ...resto } = req.body;
 
     if ( password ) {
         // Encriptar la contraseña
@@ -68,7 +66,6 @@ const usuariosDelete = async(req, res = response) => {
     const { id } = req.params;
     const usuario = await Usuario.findByIdAndUpdate( id, { estado: false } );
 
-    
     res.json(usuario);
 }
 

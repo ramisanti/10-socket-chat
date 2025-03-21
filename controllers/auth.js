@@ -9,12 +9,12 @@ const { googleVerify } = require('../helpers/google-verify');
 
 const login = async(req, res = response) => {
 
-    const { correo, password } = req.body;
+    const { email, password } = req.body;
 
     try {
       
         // Verificar si el email existe
-        const usuario = await Usuario.findOne({ correo });
+        const usuario = await Usuario.findOne({ email });
         if ( !usuario ) {
             return res.status(400).json({
                 msg: 'Usuario / Password no son correctos - correo'
@@ -59,15 +59,15 @@ const googleSignin = async(req, res = response) => {
     const { id_token } = req.body;
     
     try {
-        const { correo, nombre, img } = await googleVerify( id_token );
+        const { email, nombre, img } = await googleVerify( id_token );
 
-        let usuario = await Usuario.findOne({ correo });
+        let usuario = await Usuario.findOne({ email });
 
         if ( !usuario ) {
             // Tengo que crearlo
             const data = {
                 nombre,
-                correo,
+                email,
                 password: ':P',
                 img,
                 google: true
@@ -99,8 +99,6 @@ const googleSignin = async(req, res = response) => {
         })
 
     }
-
-
 
 }
 

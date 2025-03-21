@@ -11,8 +11,6 @@ const { Usuario, Producto } = require('../models');
 
 
 const cargarArchivo = async(req, res = response) => {
-
-
     try {
         
         // txt, md
@@ -73,7 +71,6 @@ const actualizarImagen = async(req, res = response ) => {
     modelo.img = nombre;
 
     await modelo.save();
-
 
     res.json( modelo );
 
@@ -176,8 +173,6 @@ const mostrarImagen = async(req, res = response ) => {
     const pathImagen = path.join( __dirname, '../assets/no-image.jpg');
     res.sendFile( pathImagen );
 }
-
-
 
 
 module.exports = {

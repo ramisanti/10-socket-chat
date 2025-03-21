@@ -1,12 +1,9 @@
 
 const miFormulario = document.querySelector('form');
 
-
 const url = ( window.location.hostname.includes('localhost') )
             ? 'http://localhost:8080/api/auth/'
-            : 'https://restserver-curso-fher.herokuapp.com/api/auth/';
-
-
+            : 'http://localhost:8080/api/auth/';
 
 miFormulario.addEventListener('submit', ev => {
     ev.preventDefault();
@@ -29,7 +26,7 @@ miFormulario.addEventListener('submit', ev => {
         }
 
         localStorage.setItem('token', token);
-        window.location = 'chat.html';
+        //window.location = 'chat.html';
     })
     .catch( err => {
         console.log(err)
@@ -38,17 +35,7 @@ miFormulario.addEventListener('submit', ev => {
 });
 
 
-
-
-            
-
 function onSignIn(googleUser) {
-
-    // var profile = googleUser.getBasicProfile();
-    // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    // console.log('Name: ' + profile.getName());
-    // console.log('Image URL: ' + profile.getImageUrl());
-    // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
     var id_token = googleUser.getAuthResponse().id_token;
     const data = { id_token };
@@ -61,7 +48,7 @@ function onSignIn(googleUser) {
     .then( resp => resp.json() )
     .then( ({ token }) => {
         localStorage.setItem('token',token);
-        window.location = 'chat.html';
+        //window.location = 'chat.html';
     })
     .catch( console.log );
     
