@@ -46,11 +46,11 @@ const conectarSocket = async() => {
     });
 
     socket.on('connect', () =>{
-        console.log('Sockets online')
+        
     });
 
     socket.on('disconnect', () =>{
-        console.log('Sockets offline')
+        
     });
 
     socket.on('recibir-mensajes', dibujarMensajes );
@@ -119,14 +119,11 @@ txtMensaje.addEventListener('keyup', ({ keyCode }) => {
 
 
 btnSalir.addEventListener('click', ()=> {
-
+    const correo = localStorage.getItem('correo');
     localStorage.removeItem('token');
-
-    const auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then( () => {
-        console.log('User signed out.');
-        window.location = 'index.html';
-    });
+    localStorage.removeItem('correo');
+    google.accounts.id.revoke(correo);
+    window.location = 'index.html';
 });
 
 const main = async() => {
@@ -134,12 +131,7 @@ const main = async() => {
     await validarJWT();
 }
 
-(()=>{
-    gapi.load('auth2', () => {
-        gapi.auth2.init();
-        main();
-    });
-})();
+main();
 
 
 
@@ -147,5 +139,5 @@ const main = async() => {
 
 
 
-// main();
+
 

@@ -36,27 +36,20 @@
             </ul>
         </div>
 
-
         <div class="col-sm-6">
             <h3>Chat completo</h3>
             <hr>
             <ul id="ulMensajes">
-
             </ul>
-
-
         </div>
-
-
     </div>
-
 
     <button id="btnSalir" class="btn btn-outline-danger">
         Logout
     </button>
 
-
-    <script src="https://apis.google.com/js/platform.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script> 
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="./socket.io/socket.io.js"></script>
     <script src="./js/chat.js"></script>
 </body>

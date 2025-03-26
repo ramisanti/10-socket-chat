@@ -1,4 +1,5 @@
 
+
 const miFormulario = document.querySelector('form');
 
 const url = ( window.location.hostname.includes('localhost') )
@@ -24,7 +25,6 @@ miFormulario.addEventListener('submit', ev => {
         if( msg ){
             return console.error( msg );
         }
-
         localStorage.setItem('token', token);
         window.location = 'chat.html';
     })
@@ -34,29 +34,30 @@ miFormulario.addEventListener('submit', ev => {
     
 });
 
-
-function onSignIn(googleUser) {
-
-    var id_token = googleUser.getAuthResponse().id_token;
+function handleCredentialResponse(response) { 
+    var id_token  =  response.credential;
     const data = { id_token };
-
     fetch( url + 'google', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( data )
     })
     .then( resp => resp.json() )
-    .then( ({ token }) => {
+    .then( ({ token, usuario }) => {
         localStorage.setItem('token',token);
-        //window.location = 'chat.html';
-        console.log(token);
+        localStorage.setItem('correo', usuario.email);
+        window.location = 'chat.html';
     })
     .catch( console.log );
-}
+    
+} 
+
 
 function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-    console.log('User signed out.');
-    });
+    localStorage.removeItem('token');
+    const correo = localStorage.getItem('correo');
+    localStorage.removeItem('correo');
+    google.accounts.id.revoke(correo);
+    console.log('consent revoked');
+    google.accounts.id.disableAutoSelect();
 }
