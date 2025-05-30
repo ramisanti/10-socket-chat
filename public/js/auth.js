@@ -1,10 +1,9 @@
 
+const url = ( window.location.hostname.includes('localhost:') )
+            ? 'http://localhost:8090/api/auth/'
+            : 'http://localhost:8090/api/auth/';
 
 const miFormulario = document.querySelector('form');
-
-const url = ( window.location.hostname.includes('localhost') )
-            ? 'http://localhost:8080/api/auth/'
-            : 'http://localhost:8080/api/auth/';
 
 miFormulario.addEventListener('submit', ev => {
     ev.preventDefault();

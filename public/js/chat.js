@@ -1,6 +1,6 @@
-const url = ( window.location.hostname.includes('localhost') )
-            ? 'http://localhost:8080/api/auth/'
-            : 'http://localhost:8080/api/auth/';
+const url = ( window.location.hostname.includes('localhost:') )
+            ? 'http://localhost:8090/api/auth/'
+            : 'http://localhost:8090/api/auth/';
 
 let usuario = null;
 let socket  = null;
